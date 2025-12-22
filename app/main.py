@@ -1,7 +1,13 @@
+from email.mime import base
 from fastapi import FastAPI
 
-from app.api.router import router
+from app.core.database import engine, Base
+from app.models import user , task
 
-app = FastAPI(title="Todo List", version="1.0.0", description="FastAPI Todo List API")
+app = FastAPI(
+    title="Todo List",
+    version="1.0.0",
+    description="FastAPI Todo List API",
+)
 
-app.include_router(router, prefix="/api")
+Base.metadata.create_all(engine)
