@@ -30,5 +30,5 @@ def verify_token(token: str) -> dict:
             token, settings.jwt_secret, algorithms=[settings.jwt_algorithm]
         )
         return decoded_token if decoded_token["expires"] >= time() else None
-    except:
+    except jwt.PyJWTError:
         return None
